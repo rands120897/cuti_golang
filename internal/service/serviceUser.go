@@ -7,7 +7,7 @@ import (
 	"cuti/internal/repository"
 )
 
-func InputUser(UserRequest web.UserRequest) model.User {
+func InputUser(UserRequest web.UserRequest) (model.User, error) {
 
 	userinsert := model.User{
 		Name:      UserRequest.Name,
@@ -16,8 +16,8 @@ func InputUser(UserRequest web.UserRequest) model.User {
 		User_role: UserRequest.User_role,
 	}
 
-	repository.InsertUser(connection.OpenConnection(), userinsert)
+	_, err := repository.InsertUser(connection.OpenConnection(), userinsert)
 
-	return userinsert
+	return userinsert, err
 
 }

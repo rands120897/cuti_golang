@@ -11,14 +11,16 @@ func RequestCreateUser(c *fiber.Ctx) error {
 
 	userRequest := web.UserRequest{}
 	if err := c.BodyParser(&userRequest); err != nil {
-		return c.Status(fiber.StatusBadRequest).SendString("ssss")
+		// errStatus := c.Status(fiber.StatusBadRequest).SendString("error format request")
+
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"kode": "404"})
 	}
 
 	service.InputUser(userRequest)
 
 	return c.JSON(fiber.Map{
 		"message": "user created Succesfully",
-		"user":    userRequest,
+		// "error":   errRes.Error(),
 	})
 
 }

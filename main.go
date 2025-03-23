@@ -15,11 +15,9 @@ func main() {
 	if errDb != nil {
 		fmt.Println(errDb.Error())
 	}
-	defer db.Close()
 
 	app := fiber.New()
 	app.Post("/user", controller.RequestCreateUser)
 
 	app.Listen(":3000")
-
 }
